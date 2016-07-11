@@ -62,8 +62,8 @@ namespace CSG.Sharp
 
             _camera.Perspective(90.0f, aspectRatio, 0.01f, 1000.0f);
 
-            CSG cube = Cube.Create(new Vector(15, 0, -20), 5);
-            CSG sphere = Sphere.Create(new Vector(35, 0, -20), 10);
+            CSG cube = Cube.Create(new Vector(0, 0, -20), 10);
+            CSG sphere = Sphere.Create(new Vector(30, 0, -20), 10);
             CSG cylinder = Cylinder.Create(new Vector(60, -10, -20), new Vector(60, 10, -20), 10);
 
             AddToVertices(cube.ToPolygons());

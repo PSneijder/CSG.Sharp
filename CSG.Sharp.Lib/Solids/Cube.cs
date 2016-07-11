@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CSG.Sharp
@@ -18,8 +19,8 @@ namespace CSG.Sharp
     {
         public static CSG Create(Vector center = default(Vector), double radius = 1)
         {
-            var c = new Vector(center == Vector.Zero ? Vector.One : center);
-            var r = new Vector(radius, radius, radius);
+            var c = center;
+            var r = new double[] { radius, radius, radius };
 
             var polygons = new List<Polygon>()
             {
@@ -34,15 +35,17 @@ namespace CSG.Sharp
             return CSG.FromPolygons(polygons.ToArray());
         }
 
-        private static Polygon CreatePolygon(IEnumerable<short> info, Vector normal, Vector c, Vector r)
+        private static Polygon CreatePolygon(IEnumerable<short> info, Vector normal, Vector c, double[] r)
         {
             return new Polygon(info.Select(i => {
+
                 var pos = new Vector(
-                  c.x + r.x * (2 * (i & 1) - 1),
-                  c.y + r.y * (2 * (i & 2) - 1),
-                  c.z + r.z * (2 * (i & 4) - 1)
+                  c.x + r[0] * (2 * Convert.ToInt16(Convert.ToBoolean(i & 1)) - 1),
+                  c.y + r[1] * (2 * Convert.ToInt16(Convert.ToBoolean(i & 2)) - 1),
+                  c.z + r[2] * (2 * Convert.ToInt16(Convert.ToBoolean(i & 4)) - 1)
                 );
                 return new Vertex(pos, normal);
+
             }).ToArray());
         }
     }
