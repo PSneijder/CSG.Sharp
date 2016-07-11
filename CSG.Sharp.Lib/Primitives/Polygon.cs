@@ -33,7 +33,10 @@ namespace CSG.Sharp
 
         public void Flip()
         {
-            Vertices.Reverse().ForEach(v => v.Flip());
+            var vertices = Vertices.Reverse();
+            vertices.ForEach(v => v.Flip());
+
+            Vertices = vertices.ToArray();
             Plane.Flip();
         }
     }
