@@ -62,13 +62,19 @@ namespace CSG.Sharp
 
             _camera.Perspective(90.0f, aspectRatio, 0.01f, 1000.0f);
 
-            CSG cube = Cube.Create(new Vector(0, 0, -20), 10);
+            /*CSG cube = Cube.Create(new Vector(0, 0, -20), 10);
             CSG sphere = Sphere.Create(new Vector(30, 0, -20), 10);
             CSG cylinder = Cylinder.Create(new Vector(60, -10, -20), new Vector(60, 10, -20), 10);
 
             AddToVertices(cube.ToPolygons());
             AddToVertices(sphere.ToPolygons());
-            AddToVertices(cylinder.ToPolygons());
+            AddToVertices(cylinder.ToPolygons());*/
+
+            var cube = Cube.Create(radius: 10);
+            var sphere = Sphere.Create(radius: 13);
+            var polygons = cube.Subtract(sphere).ToPolygons();
+
+            AddToVertices(polygons.ToArray());
         }
 
         protected override void Update(GameTime gameTime)
@@ -174,6 +180,22 @@ namespace CSG.Sharp
             return vertices;
         }
 
+        private VertexPositionColor[] Create(Polygon polygon, out short[] indices, int count)
+        {
+            VertexPositionColor[] vertices = new VertexPositionColor[polygon.Vertices.Length];
+            indices = new short[polygon.Vertices.Length];
+
+            Color color = ColorUtils.GenerateRandomColor(Color.Wheat);
+
+            for (int i = 0; i < polygon.Vertices.Length; i++)
+            {
+                vertices[i] = new VertexPositionColor(new Vector3((float)polygon.Vertices[1].Pos.x, (float)polygon.Vertices[1].Pos.y, (float)polygon.Vertices[1].Pos.z), color);
+                indices[i] = (short)(indexId + 1);
+            }
+
+            return vertices;
+        }
+
         private void AddToVertices(Polygon[] polygons)
         {
             var vertices = new List<VertexPositionColor>();
@@ -193,15 +215,13 @@ namespace CSG.Sharp
                         polygonVertices = CreateRectangle(polygon, out polygonIndices, vertices.Count);
                         break;
                     default:
+                        Debug.WriteLine("WARNING: {0}", polygon.Vertices.Length);
                         break;
                 }
 
                 vertices.AddRange(polygonVertices);
                 indices.AddRange(polygonIndices);
             }
-
-            //_vertices = vertices.ToArray();
-            //_indices = indices.ToArray();
 
             _vertices.AddRange(vertices);
             _indices.AddRange(indices);
