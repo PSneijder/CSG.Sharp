@@ -112,5 +112,23 @@ namespace CSG.Sharp
         {
             return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Vector other = (Vector)obj;
+            return other.x == x && other.y == y && other.z == z;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 13;
+            hash = (hash * 7) + x.GetHashCode();
+            hash = (hash * 8) + y.GetHashCode();
+            hash = (hash * 9) + z.GetHashCode();
+            return hash;
+        }
     }
 }
