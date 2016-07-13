@@ -214,34 +214,34 @@ namespace CSG.Sharp
 
         private VertexPositionColor[] CreateHexagon(Polygon polygon, out short[] indices, int count)
         {
-            VertexPositionColor[] vertices = new VertexPositionColor[10];
-            indices = new short[10];
+            VertexPositionColor[] vertices = new VertexPositionColor[9];
+            indices = new short[9];
 
             Color color = ColorUtils.GenerateRandomColor(Color.Wheat);
 
-            vertices[0] = new VertexPositionColor(new Vector3((float)polygon.Vertices[1].Pos.x, (float)polygon.Vertices[1].Pos.y, (float)polygon.Vertices[1].Pos.z), Color.Red);
-            vertices[1] = new VertexPositionColor(new Vector3((float)polygon.Vertices[2].Pos.x, (float)polygon.Vertices[2].Pos.y, (float)polygon.Vertices[2].Pos.z), Color.Red);
-            vertices[2] = new VertexPositionColor(new Vector3((float)polygon.Vertices[3].Pos.x, (float)polygon.Vertices[3].Pos.y, (float)polygon.Vertices[3].Pos.z), Color.Red);
-            /*vertices[3] = new VertexPositionColor(new Vector3((float)polygon.Vertices[0].Pos.x, (float)polygon.Vertices[0].Pos.y, (float)polygon.Vertices[0].Pos.z), Color.Green);
-            vertices[4] = new VertexPositionColor(new Vector3((float)polygon.Vertices[1].Pos.x, (float)polygon.Vertices[1].Pos.y, (float)polygon.Vertices[1].Pos.z), Color.Green);
-            vertices[5] = new VertexPositionColor(new Vector3((float)polygon.Vertices[3].Pos.x, (float)polygon.Vertices[3].Pos.y, (float)polygon.Vertices[3].Pos.z), Color.Green);
-            vertices[6] = new VertexPositionColor(new Vector3((float)polygon.Vertices[4].Pos.x, (float)polygon.Vertices[4].Pos.y, (float)polygon.Vertices[4].Pos.z), Color.Blue);
-            vertices[7] = new VertexPositionColor(new Vector3((float)polygon.Vertices[3].Pos.x, (float)polygon.Vertices[3].Pos.y, (float)polygon.Vertices[3].Pos.z), Color.Blue);
-            vertices[8] = new VertexPositionColor(new Vector3((float)polygon.Vertices[0].Pos.x, (float)polygon.Vertices[0].Pos.y, (float)polygon.Vertices[0].Pos.z), Color.Blue);*/
-            //vertices[9] = new VertexPositionColor(new Vector3((float)polygon.Vertices[0].Pos.x, (float)polygon.Vertices[0].Pos.y, (float)polygon.Vertices[0].Pos.z), color);
+            vertices[0] = new VertexPositionColor(new Vector3((float)polygon.Vertices[1].Pos.x, (float)polygon.Vertices[1].Pos.y, (float)polygon.Vertices[1].Pos.z), color);
+            vertices[1] = new VertexPositionColor(new Vector3((float)polygon.Vertices[2].Pos.x, (float)polygon.Vertices[2].Pos.y, (float)polygon.Vertices[2].Pos.z), color);
+            vertices[2] = new VertexPositionColor(new Vector3((float)polygon.Vertices[3].Pos.x, (float)polygon.Vertices[3].Pos.y, (float)polygon.Vertices[3].Pos.z), color);
+            vertices[3] = new VertexPositionColor(new Vector3((float)polygon.Vertices[0].Pos.x, (float)polygon.Vertices[0].Pos.y, (float)polygon.Vertices[0].Pos.z), color);
+            vertices[4] = new VertexPositionColor(new Vector3((float)polygon.Vertices[1].Pos.x, (float)polygon.Vertices[1].Pos.y, (float)polygon.Vertices[1].Pos.z), color);
+            vertices[5] = new VertexPositionColor(new Vector3((float)polygon.Vertices[3].Pos.x, (float)polygon.Vertices[3].Pos.y, (float)polygon.Vertices[3].Pos.z), color);
+            vertices[6] = new VertexPositionColor(new Vector3((float)polygon.Vertices[4].Pos.x, (float)polygon.Vertices[4].Pos.y, (float)polygon.Vertices[4].Pos.z), color);
+            vertices[7] = new VertexPositionColor(new Vector3((float)polygon.Vertices[3].Pos.x, (float)polygon.Vertices[3].Pos.y, (float)polygon.Vertices[3].Pos.z), color);
+            vertices[8] = new VertexPositionColor(new Vector3((float)polygon.Vertices[0].Pos.x, (float)polygon.Vertices[0].Pos.y, (float)polygon.Vertices[0].Pos.z), color);
+            //vertices[9] = new VertexPositionColor(new Vector3((float)polygon.Vertices[5].Pos.x, (float)polygon.Vertices[5].Pos.y, (float)polygon.Vertices[5].Pos.z), Color.Blue);
 
-            indices[0] = (short)(indexId + 0);
-            indices[1] = (short)(indexId + 1);
-            indices[2] = (short)(indexId + 2);
-            /*indices[3] = (short)(indexId + 0);
+            indices[0] = (short)(indexId + 1);
+            indices[1] = (short)(indexId + 2);
+            indices[2] = (short)(indexId + 3);
+            indices[3] = (short)(indexId + 0);
             indices[4] = (short)(indexId + 1);
             indices[5] = (short)(indexId + 3);
             indices[6] = (short)(indexId + 4);
             indices[7] = (short)(indexId + 3);
-            indices[8] = (short)(indexId + 0);*/
-            //indices[9] = (short)(indexId + 0);
+            indices[8] = (short)(indexId + 0);
+            //indices[9] = (short)(indexId + 5);
 
-            indexId = (short)(indexId + 8);
+            indexId = (short)(indexId + 9);
 
             return vertices;
         }
@@ -267,9 +267,9 @@ namespace CSG.Sharp
                     case 5:
                         polygonVertices = CreatePentagon(polygon, out polygonIndices, vertices.Count);
                         break;
-                    //case 6:
-                        //polygonVertices = CreateHexagon(polygon, out polygonIndices, vertices.Count);
-                        //break;
+                    case 6:
+                        polygonVertices = CreateHexagon(polygon, out polygonIndices, vertices.Count);
+                        break;
                     default:
                         Debug.WriteLine("WARNING: {0}", polygon.Vertices.Length);
                         break;
