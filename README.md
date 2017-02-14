@@ -40,3 +40,7 @@ See [CHANGES.txt](CHANGES.txt)
 * [Philip Schneider](https://github.com/PSneijder)
 
 Parts are take from the wonderful library https://evanw.github.io/csg.js/
+
+# License
+
+[MIT license](http://www.opensource.org/licenses/mit-license.php).
