@@ -1,5 +1,6 @@
 # CSG.Sharp
 
+![](https://img.shields.io/badge/.net-v4.5.2-blue.svg)
 ![](https://img.shields.io/badge/build-passing-green.svg)
 
 Constructive solid geometry on meshes using BSP trees in C#
